@@ -4,6 +4,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(1.75, 3.75, 1.75, 3),
     justifyContent: 'space-between',
+    flexDirection: 'row'
     
   },
   box: {
