@@ -10,12 +10,12 @@ import {
 import AddIcon from '@material-ui/icons/Add'
 import SearchIcon from '@material-ui/icons/Search'
 import IconFilter from './iconFilter'
-import useStyles from './style'
+import useStyle from './style'
 import AddUser from './popUp'
 
 const UsersHeader = () => {
   const [open, setOpen] = React.useState(false)
-  const classes = useStyles()
+  const classes = useStyle()
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -52,18 +52,12 @@ const UsersHeader = () => {
           >
             ADD USER
           </Button>
-          <AddUser open={open} />
+          <AddUser open={open} setOpen={setOpen} />
         </Box>
       </Toolbar>
     </AppBar>
   )
 }
 
-const ID = () => {
-  // Math.random should be unique because of its seeding algorithm.
-  // Convert it to base 36 (numbers + letters), and grab the first 9 characters
-  // after the decimal.
-  return 'DEV' + Math.random().toString(10).substr(2, 9)
-}
 
 export default UsersHeader

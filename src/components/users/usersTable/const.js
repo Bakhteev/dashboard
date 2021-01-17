@@ -336,3 +336,5 @@ export const rows = [
     '27.09,2005'
   ),
 ]
+
+console.log(rows);

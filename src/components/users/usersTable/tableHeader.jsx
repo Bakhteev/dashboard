@@ -35,7 +35,7 @@ function TableHeader(props) {
             inputProps={{ 'aria-label': 'select all desserts' }}
           />
         </TableCell>
-        <TableCell>Selected {numSelected} users</TableCell>
+        <TableCell>{`${numSelected===0 ? 'No users selected' : `Selected ${numSelected} users`}`}</TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}

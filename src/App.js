@@ -15,7 +15,6 @@ function App() {
         </Grid>
         <Grid item style={{minWidth: '80%'}}>
           <Users />
-          {/* <Switch></Switch> */}
         </Grid>
       </Grid>
     </div>

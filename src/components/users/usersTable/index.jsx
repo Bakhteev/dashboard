@@ -90,10 +90,6 @@ function UsersTable() {
     setPage(0)
   }
 
-  // const handleChangeDense = (event) => {
-  //   setDense(event.target.checked)
-  // }
-
   const isSelected = (id) => selected.indexOf(id) !== -1
 
   return (
