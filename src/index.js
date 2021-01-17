@@ -10,7 +10,7 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <CssBaseline>
         <BrowserRouter>
-          <App/>
+          <App  />
         </BrowserRouter>
       </CssBaseline>
     </ThemeProvider>
