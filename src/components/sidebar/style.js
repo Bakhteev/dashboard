@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   listItem: {
     borderRadius: '4px',
-    padding: theme.spacing(1.62, 0),
+    margin: theme.spacing(1.62, 0),
   },
   link: {
     display: 'flex',
