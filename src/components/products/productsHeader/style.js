@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: 284,
     position: 'relative',
+    marginBottom: 90,
+    
   },
   paper: {
     display: 'inline-block',
