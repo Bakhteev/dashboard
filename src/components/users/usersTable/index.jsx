@@ -8,8 +8,8 @@ import TablePagination from '@material-ui/core/TablePagination'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import Checkbox from '@material-ui/core/Checkbox'
+import axios from 'axios'
 import useStyles from './style'
-import {rows} from './const'
 import TableHeader from './tableHeader'
 
 function descendingComparator(a, b, orderBy) {
@@ -38,14 +38,13 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0])
 }
 
-function UsersTable() {
+function UsersTable({ usersData }) {
   const classes = useStyles()
   const [order, setOrder] = React.useState('asc')
   const [orderBy, setOrderBy] = React.useState('calories')
   const [selected, setSelected] = React.useState([])
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc'
     setOrder(isAsc ? 'desc' : 'asc')
@@ -54,7 +53,7 @@ function UsersTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.id)
+      const newSelecteds = usersData.map((n) => n.id)
       setSelected(newSelecteds)
       return
     }
@@ -108,10 +107,10 @@ function UsersTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={usersData.length}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(usersData, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.id)
@@ -143,13 +142,19 @@ function UsersTable() {
                         scope="row"
                         padding="none"
                       >
-                        <img src={row.img} alt="" style={{ width: '25px' }} />
-                        {row.name}
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <img
+                            src={row.img}
+                            alt=""
+                            style={{ width: '32px', borderRadius: '50%' }}
+                          />
+                          {row.name}
+                        </div>
                       </TableCell>
                       <TableCell align="right">{row.id}</TableCell>
                       <TableCell align="right">{row.phoneNumber}</TableCell>
                       <TableCell align="right">{row.emailAddress}</TableCell>
-                      <TableCell align="right">{row.data}</TableCell>
+                      <TableCell align="right">{row.date}</TableCell>
                     </TableRow>
                   )
                 })}
@@ -159,7 +164,7 @@ function UsersTable() {
         <TablePagination
           rowsPerPageOptions={[10, 20, 30]}
           component="div"
-          count={rows.length}
+          count={usersData.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}

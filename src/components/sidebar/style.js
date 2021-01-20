@@ -37,12 +37,14 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 4),
   },
   listItem: {
-    borderRadius: '4px',
     margin: theme.spacing(1.62, 0),
+    padding: 0
   },
   link: {
     display: 'flex',
     alignItems: 'center',
+    width: '100%',
+    padding: theme.spacing(1, 2),
   },
   activeLink: {
     borderRadius: '4px',

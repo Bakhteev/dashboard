@@ -13,9 +13,9 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import logo from '../../../../assets/logo.svg'
 import useStyles from './style'
-import {rows} from '../../usersTable/const'
+import { inputs } from '../../usersTable/const'
 
-const AddUser = ({ open, setOpen}) => {
+const AddUser = ({ open, setOpen, setUsersData, usersData }) => {
   const classes = useStyles()
   const [newUser, setNewUser] = React.useState({
     name: '',
@@ -23,7 +23,7 @@ const AddUser = ({ open, setOpen}) => {
     id: '',
     phoneNumber: '',
     emailAddress: '',
-    data: '',
+    date: '',
   })
   const createID = () => {
     return 'DEV' + Math.random().toString(10).substr(2, 9)
@@ -39,28 +39,26 @@ const AddUser = ({ open, setOpen}) => {
     }${separator}${year}`
     return result
   }
- const handleClickcClose = () => {
+  const handleClickcClose = () => {
     setOpen(false)
   }
   const saveData = (event) => {
     setNewUser({
-      name: event.target.value,
-      img: event.target.value,
+      name: event.target.form[0].value,
+      img: event.target.form[6].value,
       id: createID(),
-      phoneNumber: event.target.value,
-      emailAddress: event.target.value,
-      data: currentDate(),
+      phoneNumber: event.target.form[4].value,
+      emailAddress: event.target.form[2].value,
+      date: currentDate(),
     })
-    console.log(event.target)
   }
 
   const handleSubmit = (event) => {
     handleClickcClose()
     event.preventDefault()
-    rows.push(newUser)
+    setUsersData([...usersData, newUser])
   }
-
- 
+  
   return (
     <Dialog
       open={open}
@@ -93,50 +91,22 @@ const AddUser = ({ open, setOpen}) => {
               root: classes.itemDialogContent,
             }}
           >
-              <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                label="Full Name"
-                type="text"
-                fullWidth
-                variant="outlined"
-                className={classes.textField}
-                onChange={(event) => saveData(event)}
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="email"
-                label="Email"
-                type="email"
-                fullWidth
-                variant="outlined"
-                className={classes.textField}
-                onChange={(event) => saveData(event)}
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="phone"
-                label="Phone"
-                type="text"
-                fullWidth
-                variant="outlined"
-                className={classes.textField}
-                onChange={(event) => saveData(event)}
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="img"
-                label="Image url"
-                type="text"
-                fullWidth
-                variant="outlined"
-                className={classes.textField}
-                onChange={(event) => saveData(event)}
-              />
+            <form action="" onSubmit={(event) => handleSubmit(event)}>
+              {inputs.map((item) => {
+                return (
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id={item.id}
+                    label={item.label}
+                    type={item.type}
+                    fullWidth
+                    variant="outlined"
+                    className={classes.textField}
+                    onChange={(event) => saveData(event)}
+                  />
+                )
+              })}
               <Button
                 color="primary"
                 variant="contained"
@@ -145,11 +115,12 @@ const AddUser = ({ open, setOpen}) => {
               >
                 Add NEW USER
               </Button>
+            </form>
           </DialogContent>
         </Grid>
         <Grid item md={6} style={{ widht: '480px', height: '100%' }}>
           <Box className={classes.itemBox}>
-            <img src={logo} alt="" className={classes.logo}/>
+            <img src={logo} alt="" className={classes.logo} />
           </Box>
         </Grid>
       </Grid>

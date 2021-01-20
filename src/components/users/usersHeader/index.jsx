@@ -13,12 +13,19 @@ import IconFilter from './iconFilter'
 import useStyle from './style'
 import AddUser from './popUp'
 
-const UsersHeader = () => {
+const UsersHeader = ({ usersData, setUsersData, setSearchValue }) => {
   const [open, setOpen] = React.useState(false)
+  const [inputValue, setInputValue] = React.useState('')
+
   const classes = useStyle()
 
   const handleClickOpen = () => {
     setOpen(true)
+  }
+  const handleInput = (event) => {
+    setInputValue(event.target.value)
+    setSearchValue(event.target.value)
+    console.log(event.target.value)
   }
   return (
     <AppBar component="div" position="static" color="transparent" elevation="0">
@@ -40,6 +47,8 @@ const UsersHeader = () => {
             <InputBase
               placeholder="Search users by name, id"
               inputProps={{ 'aria-label': 'Search users by name, id' }}
+              value={inputValue}
+              onChange={(event) => handleInput(event)}
             />
           </Box>
         </Box>
@@ -52,12 +61,16 @@ const UsersHeader = () => {
           >
             ADD USER
           </Button>
-          <AddUser open={open} setOpen={setOpen} />
+          <AddUser
+            open={open}
+            setOpen={setOpen}
+            usersData={usersData}
+            setUsersData={setUsersData}
+          />
         </Box>
       </Toolbar>
     </AppBar>
   )
 }
-
 
 export default UsersHeader
