@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import {
   Dialog,
   DialogTitle,
@@ -14,8 +15,10 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import logo from '../../../../assets/logo.svg'
 import useStyles from './style'
 import { inputs } from '../../usersTable/const'
+import {addUserToTable, setUsersDatabase} from '../../../../redux/actions/users'
 
-const AddUser = ({ open, setOpen, setUsersData, usersData }) => {
+const AddUser = ({ open, setOpen, state }) => {
+  const dispatch = useDispatch()
   const classes = useStyles()
   const [newUser, setNewUser] = React.useState({
     name: '',
@@ -56,7 +59,9 @@ const AddUser = ({ open, setOpen, setUsersData, usersData }) => {
   const handleSubmit = (event) => {
     handleClickcClose()
     event.preventDefault()
-    setUsersData([...usersData, newUser])
+    // dispatch(setUsersDatabase(newUser))
+    dispatch(addUserToTable([...state, newUser]))
+    // setUsersData([...usersData, newUser])
   }
   
   return (

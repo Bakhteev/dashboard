@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: '#47B881',
     color: '#fff',
-    transition: '0.3s',
+    transition: '0.5s',
     '&:hover': {
       color: '#000',
     },

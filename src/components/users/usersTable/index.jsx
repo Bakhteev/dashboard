@@ -39,6 +39,7 @@ function stableSort(array, comparator) {
 }
 
 function UsersTable({ usersData }) {
+  console.log(usersData)
   const classes = useStyles()
   const [order, setOrder] = React.useState('asc')
   const [orderBy, setOrderBy] = React.useState('calories')

@@ -13,7 +13,10 @@ import IconFilter from './iconFilter'
 import useStyle from './style'
 import AddUser from './popUp'
 
-const UsersHeader = ({ usersData, setUsersData, setSearchValue }) => {
+const UsersHeader = ({
+  state,
+  setSearchValue,
+}) => {
   const [open, setOpen] = React.useState(false)
   const [inputValue, setInputValue] = React.useState('')
 
@@ -25,7 +28,6 @@ const UsersHeader = ({ usersData, setUsersData, setSearchValue }) => {
   const handleInput = (event) => {
     setInputValue(event.target.value)
     setSearchValue(event.target.value)
-    console.log(event.target.value)
   }
   return (
     <AppBar component="div" position="static" color="transparent" elevation="0">
@@ -64,8 +66,7 @@ const UsersHeader = ({ usersData, setUsersData, setSearchValue }) => {
           <AddUser
             open={open}
             setOpen={setOpen}
-            usersData={usersData}
-            setUsersData={setUsersData}
+            state={state}
           />
         </Box>
       </Toolbar>

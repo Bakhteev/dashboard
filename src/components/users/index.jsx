@@ -4,32 +4,27 @@ import UsersHeader from './usersHeader'
 import UsersTable from './usersTable'
 import useStyles from './style'
 
-const Users = () => {
+const Users = ({state}) => {
   const classes = useStyles()
-  const [usersData, setUsersData] = React.useState([])
   const [searchValue, setSearchValue] = React.useState('')
-  React.useEffect(async () => {
-    await axios
-      .get(`http://localhost:3000/database.json`)
-      .then((response) => response)
-      .then(({ data }) => setUsersData(data.users))
-  }, [])
   return (
     <div className={classes.root}>
       <UsersHeader
-        usersData={usersData}
-        setUsersData={setUsersData}
+        state={state}
         setSearchValue={setSearchValue}
       />
       <UsersTable
-        usersData={usersData.filter((item) => {
-          switch (searchValue) {
-            case '':
-              return item
-            case item.name.toLowerCase().includes(searchValue.toLowerCase()):
-              return item
-            case item.id.toLowerCase().includes(searchValue.toLowerCase()):
-              return item
+        usersData={state.filter((item) => {
+          if (searchValue === '') {
+            return item
+          } else if (
+            item.name.toLowerCase().includes(searchValue.toLowerCase())
+          ) {
+            return item
+          } else if (
+            item.id.toLowerCase().includes(searchValue.toLowerCase())
+          ) {
+            return item
           }
         })}
       />
