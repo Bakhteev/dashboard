@@ -15,7 +15,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import logo from '../../../../assets/logo.svg'
 import useStyles from './style'
 import { inputs } from '../../usersTable/const'
-import {addUserToTable, setUsersDatabase} from '../../../../redux/actions/users'
+import {setUsersDatabase} from '../../../../redux/actions/users'
 
 const AddUser = ({ open, setOpen, state }) => {
   const dispatch = useDispatch()
@@ -59,9 +59,7 @@ const AddUser = ({ open, setOpen, state }) => {
   const handleSubmit = (event) => {
     handleClickcClose()
     event.preventDefault()
-    // dispatch(setUsersDatabase(newUser))
-    dispatch(addUserToTable([...state, newUser]))
-    // setUsersData([...usersData, newUser])
+    dispatch(setUsersDatabase([...state, newUser]))
   }
   
   return (

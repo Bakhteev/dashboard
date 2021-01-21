@@ -19,12 +19,25 @@ const useStyles = makeStyles((theme) => ({
       color: '#000',
     },
   },
+  gutters:{
+    padding: 0,
+    
+  }
 }))
 const ProductsSearch = () => {
   const classes = useStyles()
   return (
-    <AppBar component="div" position="static" color="transparent" elevation="0">
-      <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <AppBar
+      component="div"
+      position="static"
+      color="transparent"
+      elevation="0"
+      style={{ marginBottom: 24 }}
+    >
+      <Toolbar
+        style={{ display: 'flex', justifyContent: 'space-between' }}
+        classes={{ gutters: classes.gutters }}
+      >
         <Box
           style={{
             background: '#fff',
@@ -32,6 +45,8 @@ const ProductsSearch = () => {
               '0px 1px 0px rgba(63, 63, 68, 0.05), 0px 1px 3px rgba(63, 63, 68, 0.15)',
             borderRadius: 4,
             width: 512,
+            display: 'flex',
+            
           }}
         >
           <IconButton>
@@ -40,6 +55,7 @@ const ProductsSearch = () => {
           <InputBase
             placeholder="Search users by name, id"
             inputProps={{ 'aria-label': 'Search users by name, id' }}
+            fullWidth
           />
         </Box>
         <Button classes={{ root: classes.root }}>NEW PRODUCT</Button>
