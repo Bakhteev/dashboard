@@ -17,16 +17,13 @@ const Users = () => {
   })
   React.useEffect(async () => {
     await axios
-      .get(`https://dasboard-deae2.web.app/database.json`)
+      .get(`http://localhost:3000/database.json`)
       .then((response) => response.data)
       .then(({ users }) => dispatch(setUsersDatabase(users)))
   }, [])
   return (
     <div className={classes.root}>
-      <UsersHeader
-        state={state.items}
-        setSearchValue={setSearchValue}
-      />
+      <UsersHeader state={state.items} setSearchValue={setSearchValue} />
       <UsersTable
         usersData={state.items.filter((item) => {
           if (searchValue === '') {

@@ -16,7 +16,7 @@ const Products = () => {
   })
   React.useEffect(async () => {
     await axios
-      .get(`https://dasboard-deae2.web.app/database.json`)
+      .get(`http://localhost:3000/database.json`)
       .then((response) => response.data)
       .then(({ products }) => dispatch(setProducts(products)))
   }, [])
@@ -25,11 +25,11 @@ const Products = () => {
     <>
       <ProductsHeader />
       <ProductsSearch />
-      <Grid container style={{margin: 0 -12,
+      <Grid container style={{margin: "0 -16px",
       }}>
         {state.items.map((item) => {
           return (
-            <Grid item xs={4} style={{ padding: '0 12px', boxSizing:'border-box', marginBottom: 24,
+            <Grid item xs={4} style={{ padding: '0 16px', boxSizing:'border-box', marginBottom: 24,
              }}>
               <ProductsCard {...item} />
             </Grid>
