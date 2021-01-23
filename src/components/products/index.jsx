@@ -20,7 +20,7 @@ const Products = () => {
       .then((response) => response.data)
       .then(({ products }) => dispatch(setProducts(products)))
   }, [])
-  console.log(state.items)
+  // console.log(state.items)
   return (
     <>
       <ProductsHeader />

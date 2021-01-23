@@ -1,5 +1,4 @@
-import { SET_USERS_DATABASE } from '../actions/users'
-
+import { SET_USERS_DATABASE, SHOW_LOADER, HIDE_LOADER } from '../actions/users'
 const initialState = {
   items: [],
 }
@@ -11,6 +10,16 @@ const usersDatabase = (state = initialState, action) => {
         ...state,
         items: action.payload,
       }
+    case SHOW_LOADER:
+      return {
+        ...state,
+        loading: true,
+      }
+      case HIDE_LOADER:
+        return {
+          ...state,
+          loading: false,
+        }
   }
   return state
 }

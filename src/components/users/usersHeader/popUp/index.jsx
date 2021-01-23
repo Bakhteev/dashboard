@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import axios from 'axios'
 import {
   Dialog,
   DialogTitle,
@@ -15,15 +16,32 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import logo from '../../../../assets/logo.svg'
 import useStyles from './style'
 import { inputs } from '../../usersTable/const'
-import {setUsersDatabase} from '../../../../redux/actions/users'
+import { setUsersDatabase } from '../../../../redux/actions/users'
+
+const url = 'https://dasboard-deae2-default-rtdb.firebaseio.com/'
 
 const AddUser = ({ open, setOpen, state }) => {
   const dispatch = useDispatch()
+  const addNote = async (newUser) => {
+    const user =  newUser 
+    try {
+      const res = await axios.post(`${url}/users.json`, user)
+      console.log(res.data)
+      const payload = {
+        ...user,
+        id: res.data.name,
+      }
+      dispatch(setUsersDatabase([...state, payload]))
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
+
   const classes = useStyles()
   const [newUser, setNewUser] = React.useState({
     name: '',
     img: '',
-    id: '',
+    userId: '',
     phoneNumber: '',
     emailAddress: '',
     date: '',
@@ -49,7 +67,7 @@ const AddUser = ({ open, setOpen, state }) => {
     setNewUser({
       name: event.target.form[0].value,
       img: event.target.form[6].value,
-      id: createID(),
+      userId: createID(),
       phoneNumber: event.target.form[4].value,
       emailAddress: event.target.form[2].value,
       date: currentDate(),
@@ -59,9 +77,9 @@ const AddUser = ({ open, setOpen, state }) => {
   const handleSubmit = (event) => {
     handleClickcClose()
     event.preventDefault()
-    dispatch(setUsersDatabase([...state, newUser]))
+    addNote(newUser)
   }
-  
+
   return (
     <Dialog
       open={open}
