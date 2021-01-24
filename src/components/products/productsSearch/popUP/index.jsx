@@ -20,7 +20,7 @@ import { setProducts } from '../../../../redux/actions/products'
 
 const url = 'https://dasboard-deae2-default-rtdb.firebaseio.com'
 
-const AddProduct = ({ open, setOpen, state }) => {
+const AddProduct = ({ open, setOpen, state, value }) => {
   const dispatch = useDispatch()
   const classes = useStyles()
   const [newProduct, setNewProduct] = React.useState({
@@ -30,6 +30,7 @@ const AddProduct = ({ open, setOpen, state }) => {
     updatedTime: '',
     downloads: 0,
   })
+
 
   const handleClickcClose = () => {
     setOpen(false)
@@ -56,7 +57,7 @@ const AddProduct = ({ open, setOpen, state }) => {
       productname: event.target.form[2].value,
       productDescription: event.target.form[4].value,
       updatedTime: new Date().toUTCString(),
-      downloads: 0,
+      downloads: value,
     })
     console.log(event.target.form[0].value)
   }

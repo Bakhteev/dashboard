@@ -15,6 +15,7 @@ const Products = () => {
   const state = useSelector(({ products }) => {
     return {
       items: products.items,
+      value: products.value,
     }
   })
   const fetchNotes = async () => {
@@ -44,7 +45,11 @@ const Products = () => {
   return (
     <>
       <ProductsHeader />
-      <ProductsSearch state={state.items} setSearchValue={setSearchValue} />
+      <ProductsSearch
+        state={state.items}
+        value={state.value}
+        setSearchValue={setSearchValue}
+      />
       <Grid container style={{ margin: '0 -16px' }}>
         {state.items
           .filter((item) => {
@@ -67,7 +72,7 @@ const Products = () => {
                   marginBottom: 24,
                 }}
               >
-                <ProductsCard {...item} />
+                <ProductsCard {...item} value={state.value} />
               </Grid>
             )
           })}
