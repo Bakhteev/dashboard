@@ -15,11 +15,11 @@ const usersDatabase = (state = initialState, action) => {
         ...state,
         loading: true,
       }
-      case HIDE_LOADER:
-        return {
-          ...state,
-          loading: false,
-        }
+    case HIDE_LOADER:
+      return {
+        ...state,
+        loading: false,
+      }
   }
   return state
 }

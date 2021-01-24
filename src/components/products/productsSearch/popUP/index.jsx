@@ -15,74 +15,56 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import logo from '../../../../assets/logo.svg'
 import useStyles from './style'
-import { inputs } from '../../usersTable/const'
-import { setUsersDatabase } from '../../../../redux/actions/users'
+import { inputs } from './const'
+import { setProducts } from '../../../../redux/actions/products'
 
 const url = 'https://dasboard-deae2-default-rtdb.firebaseio.com'
 
-const AddUser = ({ open, setOpen, state }) => {
+const AddProduct = ({ open, setOpen, state }) => {
   const dispatch = useDispatch()
   const classes = useStyles()
-
-  const addNote = async (newUser) => {
-    const user = newUser
-    try {
-      const res = await axios.post(`${url}/users.json`, user)
-      console.log(res.data)
-      const payload = {
-        ...user,
-        id: res.data.name,
-      }
-      dispatch(setUsersDatabase([...state, payload]))
-    } catch (e) {
-      throw new Error(e.message)
-    }
-  }
-
-  const [newUser, setNewUser] = React.useState({
-    name: '',
-    img: '',
-    userId: '',
-    phoneNumber: '',
-    emailAddress: '',
-    date: '',
+  const [newProduct, setNewProduct] = React.useState({
+    productLogo: '',
+    productname: '',
+    productDescription: '',
+    updatedTime: '',
+    downloads: 0,
   })
-
-  const createID = () => {
-    return 'DEV' + Math.random().toString(10).substr(2, 9)
-  }
-
-  const currentDate = () => {
-    const newDate = new Date()
-    const date = newDate.getDate()
-    const month = newDate.getMonth() + 1
-    const year = newDate.getFullYear()
-    const separator = '/'
-    const result = `${date}${separator}${
-      month < 10 ? `0${month}` : `${month}`
-    }${separator}${year}`
-    return result
-  }
 
   const handleClickcClose = () => {
     setOpen(false)
   }
 
+  const addProduct = async (newProduct) => {
+    const product = newProduct
+    try {
+      const res = await axios.post(`${url}/products.json`, product)
+      console.log(res.data)
+      const payload = {
+        ...product,
+        id: res.data.name,
+      }
+      dispatch(setProducts([...state, payload]))
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
+
   const saveData = (event) => {
-    setNewUser({
-      name: event.target.form[0].value,
-      img: event.target.form[6].value,
-      userId: createID(),
-      phoneNumber: event.target.form[4].value,
-      emailAddress: event.target.form[2].value,
-      date: currentDate(),
+    setNewProduct({
+      productLogo: event.target.form[0].value,
+      productname: event.target.form[2].value,
+      productDescription: event.target.form[4].value,
+      updatedTime: new Date().toUTCString(),
+      downloads: 0,
     })
+    console.log(event.target.form[0].value)
   }
 
   const handleSubmit = (event) => {
     handleClickcClose()
     event.preventDefault()
-    addNote(newUser)
+    addProduct(newProduct)
   }
 
   return (
@@ -107,10 +89,10 @@ const AddUser = ({ open, setOpen, state }) => {
             id="form-dialog-title"
             classes={{ root: classes.dialogTitle }}
           >
-            Create a new user
+            Create a new product
           </DialogTitle>
           <DialogContentText className={classes.dialogContentText}>
-            Add main information about user
+            Add main information about product
           </DialogContentText>
           <DialogContent
             classes={{
@@ -139,7 +121,7 @@ const AddUser = ({ open, setOpen, state }) => {
                 className={classes.itemBtn}
                 onClick={handleSubmit}
               >
-                Add NEW USER
+                Add NEW PRODUCT
               </Button>
             </form>
           </DialogContent>
@@ -154,4 +136,4 @@ const AddUser = ({ open, setOpen, state }) => {
   )
 }
 
-export default AddUser
+export default AddProduct

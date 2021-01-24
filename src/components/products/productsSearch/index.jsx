@@ -8,47 +8,36 @@ import {
   Button,
 } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
+import useStyles from './style'
+import AddProduct from './popUP'
 
-import { makeStyles } from '@material-ui/core/styles'
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: '#47B881',
-    color: '#fff',
-    transition: '0.5s',
-    '&:hover': {
-      color: '#000',
-    },
-  },
-  gutters:{
-    padding: 0,
-    
-  }
-}))
-const ProductsSearch = () => {
+const ProductsSearch = ({ state, setSearchValue }) => {
+  const [open, setOpen] = React.useState(false)
+  const [inputValue, setInputValue] = React.useState('')
+
   const classes = useStyles()
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleInput = (event) => {
+    setInputValue(event.target.value)
+    setSearchValue(event.target.value)
+  }
   return (
     <AppBar
       component="div"
       position="static"
       color="transparent"
       elevation="0"
-      style={{ marginBottom: 24 }}
+      className={classes.appBar}
     >
       <Toolbar
-        style={{ display: 'flex', justifyContent: 'space-between' }}
+        className={classes.toolBar}
         classes={{ gutters: classes.gutters }}
       >
-        <Box
-          style={{
-            background: '#fff',
-            boxShadow:
-              '0px 1px 0px rgba(63, 63, 68, 0.05), 0px 1px 3px rgba(63, 63, 68, 0.15)',
-            borderRadius: 4,
-            width: 512,
-            display: 'flex',
-            
-          }}
-        >
+        <Box className={classes.box}>
           <IconButton>
             <SearchIcon />
           </IconButton>
@@ -56,9 +45,14 @@ const ProductsSearch = () => {
             placeholder="Search users by name, id"
             inputProps={{ 'aria-label': 'Search users by name, id' }}
             fullWidth
+            value={inputValue}
+            onChange={(event) => handleInput(event)}
           />
         </Box>
-        <Button classes={{ root: classes.root }}>NEW PRODUCT</Button>
+        <Button classes={{ root: classes.root }} onClick={handleClickOpen}>
+          NEW PRODUCT
+        </Button>
+        <AddProduct setOpen={setOpen} open={open} state={state} />
       </Toolbar>
     </AppBar>
   )

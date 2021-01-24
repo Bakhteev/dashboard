@@ -76,7 +76,7 @@ const Users = () => {
           ) {
             return item
           } else if (
-            item.id.toLowerCase().includes(searchValue.toLowerCase())
+            item.userId.toLowerCase().includes(searchValue.toLowerCase())
           ) {
             return item
           }

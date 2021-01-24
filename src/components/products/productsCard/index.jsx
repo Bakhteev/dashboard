@@ -9,15 +9,7 @@ import {
 } from '@material-ui/core'
 import AccessTimeOutlinedIcon from '@material-ui/icons/AccessTimeOutlined'
 import GetAppIcon from '@material-ui/icons/GetApp'
-import { makeStyles } from '@material-ui/core/styles'
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: 0,
-  },
-  btn: {
-    padding: 4,
-  },
-}))
+import useStyles from './style'
 
 const ProductsCard = ({
   productLogo,
@@ -29,61 +21,18 @@ const ProductsCard = ({
   const classes = useStyles()
   return (
     <Card>
-      <CardContent
-        style={{ textAlign: 'center', padding: '24px 28px 10px 28px' }}
-      >
-        <img
-          src={productLogo}
-          alt={productname}
-          style={{
-            height: 58,
-            padding: 3,
-            border: '1px solid #EDF0F2',
-            borderRadius: 4,
-          }}
-        />
-        <Typography
-          variant="h3"
-          style={{
-            margin: '19px 0 8px',
-            fontWeight: 500,
-            fontSize: 18,
-            lineHeight: 1.16,
-          }}
-        >
+      <CardContent className={classes.cardContent}>
+        <img src={productLogo} alt={productname} className={classes.icon} />
+        <Typography variant="h3" className={classes.title}>
           {productname}
         </Typography>
-        <Typography
-          variant="p"
-          style={{
-            fontWeight: 'normal',
-            fontSize: 14,
-            lineHeight: 1.14,
-            color: '#66788A',
-          }}
-        >
+        <Typography variant="p" className={classes.description}>
           {productDescription}
         </Typography>
-        <Box
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: 27,
-          }}
-        >
-          <Box style={{ display: 'flex', alignItems: 'center' }}>
+        <Box className={classes.row}>
+          <Box className={classes.rowLeft}>
             <AccessTimeOutlinedIcon />
-            <Typography
-              variant="span"
-              style={{
-                marginLeft: 8,
-                fontWeight: 'normal',
-                fontSize: 12,
-                lineHeight: 1.16,
-                color: '#66788A',
-              }}
-            >
+            <Typography variant="span" className={classes.date}>
               {updatedTime}
             </Typography>
           </Box>
@@ -91,15 +40,7 @@ const ProductsCard = ({
             <IconButton classes={{ root: classes.btn }}>
               <GetAppIcon />
             </IconButton>
-            <Typography
-              variant="span"
-              style={{
-                fontWeight: 'normal',
-                fontSize: 12,
-                lineHeight: 1.16,
-                color: '#66788A',
-              }}
-            >
+            <Typography variant="span" className={classes.downloads}>
               {downloads}
             </Typography>
           </CardActions>

@@ -7,34 +7,70 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { setProducts } from '../../redux/actions/products'
 
+const url = 'https://dasboard-deae2-default-rtdb.firebaseio.com'
+
 const Products = () => {
   const dispatch = useDispatch()
+  const [searchValue, setSearchValue] = React.useState('')
   const state = useSelector(({ products }) => {
     return {
       items: products.items,
     }
   })
-  React.useEffect(async () => {
-    await axios
-      .get(`http://localhost:3000/database.json`)
-      .then((response) => response.data)
-      .then(({ products }) => dispatch(setProducts(products)))
+  const fetchNotes = async () => {
+    // showLoader()
+
+    const res = await axios.get(`${url}/products.json`)
+    // console.log(res.data)
+    if (!res.data) {
+      return (res.data = {})
+    } else {
+      // hideLoader()
+      const payload = Object.keys(res.data).map((key) => {
+        return {
+          ...res.data[key],
+          id: key,
+        }
+      })
+
+      dispatch(setProducts(payload))
+    }
+  }
+  // console.log(state)
+  React.useEffect(() => {
+    fetchNotes()
   }, [])
   // console.log(state.items)
   return (
     <>
       <ProductsHeader />
-      <ProductsSearch />
-      <Grid container style={{margin: "0 -16px",
-      }}>
-        {state.items.map((item) => {
-          return (
-            <Grid item xs={4} style={{ padding: '0 16px', boxSizing:'border-box', marginBottom: 24,
-             }}>
-              <ProductsCard {...item} />
-            </Grid>
-          )
-        })}
+      <ProductsSearch state={state.items} setSearchValue={setSearchValue} />
+      <Grid container style={{ margin: '0 -16px' }}>
+        {state.items
+          .filter((item) => {
+            if (searchValue === '') {
+              return item
+            } else if (
+              item.productname.toLowerCase().includes(searchValue.toLowerCase())
+            ) {
+              return item
+            }
+          })
+          .map((item) => {
+            return (
+              <Grid
+                item
+                xs={4}
+                style={{
+                  padding: '0 16px',
+                  boxSizing: 'border-box',
+                  marginBottom: 24,
+                }}
+              >
+                <ProductsCard {...item} />
+              </Grid>
+            )
+          })}
       </Grid>
     </>
   )

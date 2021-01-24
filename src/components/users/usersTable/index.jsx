@@ -145,7 +145,7 @@ function UsersTable({ usersData }) {
                           <img
                             src={row.img}
                             alt=""
-                            style={{ width: '32px', borderRadius: '50%' }}
+                            className={classes.avatar}
                           />
                           {row.name}
                         </div>

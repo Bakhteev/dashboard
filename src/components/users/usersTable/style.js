@@ -1,4 +1,3 @@
-
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +27,10 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: 20,
     width: 1,
+  },
+  avatar: {
+    maxWidth: '32px',
+    borderRadius: '50%',
   },
 }))
 
