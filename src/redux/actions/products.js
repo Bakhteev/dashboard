@@ -7,5 +7,5 @@ export const setProducts = (items) => ({
 })
 export const counter = (payload) => ({
   type: INCREMENT,
-  payload
+  payload,
 })

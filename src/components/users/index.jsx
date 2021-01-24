@@ -24,7 +24,7 @@ const Users = () => {
     // showLoader()
 
     const res = await axios.get(`${url}/users.json`)
-    // console.log(res.data)
+ 
     if (!res.data) {
       return (res.data = {})
     } else {
@@ -39,11 +39,10 @@ const Users = () => {
       dispatch(setUsersDatabase(payload))
     }
   }
-  // console.log(state)
+
   React.useEffect(() => {
     fetchNotes()
   }, [])
-  console.log(state)
   return (
     <div className={classes.root}>
       <UsersHeader state={state.items} setSearchValue={setSearchValue} />

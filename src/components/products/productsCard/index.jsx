@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import AccessTimeOutlinedIcon from '@material-ui/icons/AccessTimeOutlined'
 import GetAppIcon from '@material-ui/icons/GetApp'
-import { counter } from '../../../redux/actions/products'
+import { counter, setProducts } from '../../../redux/actions/products'
 import { useDispatch } from 'react-redux'
 import useStyles from './style'
 
@@ -23,20 +23,26 @@ const ProductsCard = ({
   productDescription,
   updatedTime,
   downloads,
-  value,
+  fetchNotes,
 }) => {
-  console.log(value)
   const classes = useStyles()
   const dispatch = useDispatch()
 
-  const Counter = (id) => {
-    const counterValue = axios.patch(`${url}/products/${id}.json`, {
-      downloads: downloads + 1,
-    })
-    console.log(counterValue)
-    dispatch(counter())
-
+  const Counter = async (id) => {
+    const counterValue = { downloads: downloads + 1 }
+    try {
+      const res = await axios.patch(`${url}/products/${id}.json`, counterValue)
+      const payload = {
+        ...res.data,
+        downloads: res.data.downloads,
+      }
+      dispatch(counter(payload))
+      fetchNotes()
+    } catch (e) {
+      throw new Error(e.message)
+    }
   }
+
 
   return (
     <Card>

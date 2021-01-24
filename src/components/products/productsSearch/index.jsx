@@ -42,8 +42,8 @@ const ProductsSearch = ({ state, setSearchValue }) => {
             <SearchIcon />
           </IconButton>
           <InputBase
-            placeholder="Search users by name, id"
-            inputProps={{ 'aria-label': 'Search users by name, id' }}
+            placeholder="Search products by name"
+            inputProps={{ 'aria-label': 'Search products by name' }}
             fullWidth
             value={inputValue}
             onChange={(event) => handleInput(event)}

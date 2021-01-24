@@ -2,7 +2,6 @@ import { SET_PRODUCTS, INCREMENT } from '../actions/products'
 
 const initialState = {
   items: [],
-  value: 0,
 }
 
 const products = (state = initialState, action) => {
@@ -15,7 +14,6 @@ const products = (state = initialState, action) => {
     case INCREMENT:
       return {
         ...state,
-        value: action.payload,
       }
   }
   return state

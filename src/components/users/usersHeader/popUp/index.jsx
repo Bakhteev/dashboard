@@ -28,7 +28,6 @@ const AddUser = ({ open, setOpen, state }) => {
     const user = newUser
     try {
       const res = await axios.post(`${url}/users.json`, user)
-      console.log(res.data)
       const payload = {
         ...user,
         id: res.data.name,

@@ -15,14 +15,15 @@ const Products = () => {
   const state = useSelector(({ products }) => {
     return {
       items: products.items,
-      value: products.value,
+      downloads: products.items.downloads,
     }
   })
+
   const fetchNotes = async () => {
     // showLoader()
 
     const res = await axios.get(`${url}/products.json`)
-    // console.log(res.data)
+
     if (!res.data) {
       return (res.data = {})
     } else {
@@ -33,15 +34,13 @@ const Products = () => {
           id: key,
         }
       })
-
       dispatch(setProducts(payload))
     }
   }
-  // console.log(state)
+
   React.useEffect(() => {
     fetchNotes()
   }, [])
-  // console.log(state.items)
   return (
     <>
       <ProductsHeader />
@@ -72,7 +71,7 @@ const Products = () => {
                   marginBottom: 24,
                 }}
               >
-                <ProductsCard {...item} value={state.value} />
+                <ProductsCard {...item} fetchNotes={fetchNotes} />
               </Grid>
             )
           })}

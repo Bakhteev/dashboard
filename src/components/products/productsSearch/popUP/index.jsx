@@ -40,7 +40,6 @@ const AddProduct = ({ open, setOpen, state, value }) => {
     const product = newProduct
     try {
       const res = await axios.post(`${url}/products.json`, product)
-      console.log(res.data)
       const payload = {
         ...product,
         id: res.data.name,
@@ -51,15 +50,21 @@ const AddProduct = ({ open, setOpen, state, value }) => {
     }
   }
 
+  const currentDate = () => {
+    const date = new Date().toUTCString().split('')
+    const GMT = date.splice(-4, 4)
+    const newDate = date.join('')
+    return newDate
+  }
+
   const saveData = (event) => {
     setNewProduct({
       productLogo: event.target.form[0].value,
       productname: event.target.form[2].value,
       productDescription: event.target.form[4].value,
-      updatedTime: new Date().toUTCString(),
-      downloads: value,
+      updatedTime: currentDate(),
+      downloads: 0,
     })
-    console.log(event.target.form[0].value)
   }
 
   const handleSubmit = (event) => {
