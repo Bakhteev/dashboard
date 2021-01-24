@@ -9,8 +9,10 @@ import Users from './components/users'
 import Products from './components/products'
 import { setUsersDatabase } from './redux/actions/users'
 import { setProducts } from './redux/actions/products'
+import { useStyles } from './styles'
 
 function App() {
+  const classes = useStyles()
   return (
     <div className="App">
       <Header />
@@ -18,7 +20,7 @@ function App() {
         <Grid item lg={2.5}>
           <SidebarNav />
         </Grid>
-        <Grid item style={{ width: '85%', padding: 24 }}>
+        <Grid item className={classes.rightgrid}>
           <Switch>
             <Route exact path="/users" render={() => <Users />} />
             <Route exact path="/products" render={() => <Products />} />

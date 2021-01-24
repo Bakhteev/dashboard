@@ -6,10 +6,27 @@ import ProductsSearch from './productsSearch'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { setProducts } from '../../redux/actions/products'
+import { makeStyles } from '@material-ui/core/styles'
 
 const url = 'https://dasboard-deae2-default-rtdb.firebaseio.com'
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    margin: '0 -16px',
+  },
+  card: {
+    width: '33.33%',
+    '@media screen and (max-width: 1600px)': {
+      width: '50%',
+    },
+    '@media screen and (max-width: 1090px)': {
+      width: '100%',
+    },
+  },
+}))
+
 const Products = () => {
+  const classes = useStyles()
   const dispatch = useDispatch()
   const [searchValue, setSearchValue] = React.useState('')
   const state = useSelector(({ products }) => {
@@ -49,7 +66,7 @@ const Products = () => {
         value={state.value}
         setSearchValue={setSearchValue}
       />
-      <Grid container style={{ margin: '0 -16px' }}>
+      <Grid container className={classes.container}>
         {state.items
           .filter((item) => {
             if (searchValue === '') {
@@ -63,8 +80,8 @@ const Products = () => {
           .map((item) => {
             return (
               <Grid
+              className={classes.card}
                 item
-                xs={4}
                 style={{
                   padding: '0 16px',
                   boxSizing: 'border-box',

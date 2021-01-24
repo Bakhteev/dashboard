@@ -1,6 +1,14 @@
 import { createMuiTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 export const theme = createMuiTheme({
+  breakpoints: {
+    values: {
+      tablet: 640,
+      laptop: 1024,
+      screen1630: 1630,
+    },
+  },
   overrides: {
     MuiCssBaseline: {
       '@global': {
@@ -16,3 +24,19 @@ export const theme = createMuiTheme({
     },
   },
 })
+
+export const useStyles = makeStyles((theme) => ({
+  rightgrid: {
+    width: '85%',
+    padding: 24,
+    '@media screen and (max-width: 1800px)': {
+      width: '80%',
+    },
+    '@media screen and (max-width: 1350px)': {
+      width: '75%',
+    },
+  },
+}))
+
+
+
