@@ -1,7 +1,9 @@
 import { SET_PRODUCTS, INCREMENT } from '../actions/products'
+import { SHOW_LOADER } from '../actions/users'
 
 const initialState = {
   items: [],
+  loading: false,
 }
 
 const products = (state = initialState, action) => {
@@ -10,10 +12,16 @@ const products = (state = initialState, action) => {
       return {
         ...state,
         items: action.payload,
+        loading: false,
       }
     case INCREMENT:
       return {
         ...state,
+      }
+    case SHOW_LOADER:
+      return {
+        ...state,
+        loading: true,
       }
   }
   return state
