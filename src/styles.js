@@ -2,13 +2,6 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import { makeStyles } from '@material-ui/core/styles'
 
 export const theme = createMuiTheme({
-  breakpoints: {
-    values: {
-      tablet: 640,
-      laptop: 1024,
-      screen1630: 1630,
-    },
-  },
   overrides: {
     MuiCssBaseline: {
       '@global': {
