@@ -33,7 +33,7 @@ const SidebarNav = () => {
         <Typography variant="h5" className={classes.name}>
           Roman Kutepov
         </Typography>
-        <Typography variant="span" className={classes.profession}>
+        <Typography component='span' className={classes.profession}>
           Brain Director
         </Typography>
       </Paper>
@@ -59,7 +59,7 @@ const SidebarNav = () => {
         ))}
       </List>
       <Divider variant="middle" />
-      <Typography variant="span" className={classes.span}>
+      <Typography component='span' className={classes.span}>
         Support
       </Typography>
       <Button

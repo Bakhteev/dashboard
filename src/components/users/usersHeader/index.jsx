@@ -30,7 +30,7 @@ const UsersHeader = ({
     setSearchValue(event.target.value)
   }
   return (
-    <AppBar component="div" position="static" color="transparent" elevation="0">
+    <AppBar component="div" position="static" color="transparent" elevation={0}>
       <Toolbar disableGutters={true} className={classes.root}>
         <Box className={classes.boxLeft}>
           <Button

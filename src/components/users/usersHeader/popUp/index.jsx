@@ -120,6 +120,7 @@ const AddUser = ({ open, setOpen, state }) => {
               {inputs.map((item) => {
                 return (
                   <TextField
+                    key={item.id}
                     autoFocus
                     margin="dense"
                     id={item.id}

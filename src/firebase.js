@@ -1,15 +1,15 @@
-// import * as firebase from 'firebase/app'
-// import 'firebase/auth'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
-// const app = firebase.initializeApp({
-//   apiKey: process.env.REACT_APP_FIREBASE_KEY,
-//   authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
-//   databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
-//   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-//   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-//   messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
-//   appId: process.env.REACT_APP_FIREBASE_APP_ID,
-// })
+const app = firebase.initializeApp({
+  apiKey: 'AIzaSyDwQLxYQAD-a1oLCFApsE0OL1X1LXH0nJs',
+  authDomain: 'dasboard-deae2.firebaseapp.com',
+  databaseURL: 'https://dasboard-deae2-default-rtdb.firebaseio.com',
+  projectId: 'dasboard-deae2',
+  storageBucket: 'dasboard-deae2.appspot.com',
+  messagingSenderId: '623460955096',
+  appId: '1:623460955096:web:fdf91dba62e808bfa3b8ad',
+})
 
-// console.log(firebase);
-// export default app
+export const auth = app.auth()
+export default app

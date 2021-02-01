@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react'
-import { useHistory, Link } from 'react-router-dom'
-import { useAuth } from '../../context/authContext'
+import React, { useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import {
   Button,
   Typography,
@@ -10,47 +9,43 @@ import {
   Box,
   Avatar,
 } from '@material-ui/core'
-import { Alert, AlertTitle } from '@material-ui/lab'
 import { inputs } from './const'
 import signUp from '../../assets/signUp/signUp.png'
 import avatar from '../../assets/signUp/girl.svg'
+import { useAuth } from '../../context/authContext'
+import { Alert, AlertTitle } from '@material-ui/lab'
 
-const SignUp = () => {
-  const { signup } = useAuth()
+const Login = () => {
+  const { login } = useAuth()
   const [error, setError] = useState('')
-  const [registration, setRegistration] = useState({
-    email: '',
-    password: '',
-    passwordConfirm: '',
-  })
   const [loading, setLoading] = useState(false)
   const history = useHistory()
 
+  const [registration, setRegistration] = useState({
+    email: '',
+    password: '',
+  })
 
   const saveRegistrationData = (event) => {
     setRegistration({
-      email: event.target.form[4].value,
-      password: event.target.form[6].value,
-      passwordConfirm: event.target.form[8].value,
+      email: event.target.form[0].value,
+      password: event.target.form[2].value,
     })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (registration.password !== registration.passwordConfirm) {
-      return setError('Passwords do not match')
-    }
     try {
       setError('')
       setLoading(true)
-      await signup(registration.email, registration.password)
+      await login(registration.email, registration.password)
       history.push('/users')
     } catch {
-      setError('Failed to create an account')
+      setError('Failed to sign in')
     }
+
     setLoading(false)
   }
-
   return (
     <>
       {error && (
@@ -63,7 +58,7 @@ const SignUp = () => {
         <Grid item xs={6} style={{ padding: '55px 64px 0' }}>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Link
-              to="login"
+              to="signUp"
               style={{
                 fontWeight: 'normal',
                 fontSize: 14,
@@ -73,13 +68,13 @@ const SignUp = () => {
                 color: '#9EA0A5',
               }}
             >
-              Don't have an account?
+              Have an account?
               <Typography
-                component="span"
+                variant="span"
                 style={{ textDecoration: 'underline' }}
               >
                 {' '}
-                Sign Up
+                Sign In
               </Typography>
             </Link>
           </div>
@@ -123,45 +118,16 @@ const SignUp = () => {
                   name={input.name}
                   fullWidth
                   variant="outlined"
-                  required
-                  onChange={(event) => saveRegistrationData(event)}
                   style={{ marginTop: 0, marginBottom: 18 }}
+                  onChange={(event) => saveRegistrationData(event)}
                 />
               )
             })}
-            <label
-              style={{
-                fontWeight: 'normal',
-                fontSize: 14,
-                lineHeight: 1.4,
-                letterSpacing: -0.05,
-                color: '#9EA0A5',
-                display: 'flex',
-                
-              }}
-            >
-              <Checkbox
-                color="primary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                style={{ padding: 0 }}
-                required
-              />
-              <Typography component="p">
-                I have read the
-                <Typography
-                  component="span"
-                  style={{ color: 'black', textDecoration: 'underline' }}
-                >
-                  Terms and Conditions.
-                </Typography>
-              </Typography>
-            </label>
             <Button
               type="submit"
               color="primary"
               variant="contained"
               style={{ width: '100%', marginTop: 24 }}
-              disabled={loading}
             >
               SIGN UP NOW
             </Button>
@@ -205,7 +171,7 @@ const SignUp = () => {
                 }}
               >
                 <Typography
-                  component="span"
+                  variant="span"
                   style={{
                     fontWeight: 'normal',
                     fontSize: 14,
@@ -218,12 +184,13 @@ const SignUp = () => {
                   Takamaru Ayako
                 </Typography>
                 <Typography
-                  component="span"
+                  variant="span"
                   style={{
                     fontWeight: 'normal',
                     fontSize: 14,
                     lineHeight: 1.14,
                     letterSpacing: -0.0428571,
+
                     color: '#FFFFFF',
                   }}
                 >
@@ -238,4 +205,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default Login

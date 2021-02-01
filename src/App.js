@@ -7,31 +7,51 @@ import SidebarNav from './components/sidebar'
 import Users from './components/users'
 import Products from './components/products'
 import SignUp from './components/signUp'
+import Login from './components/login'
 
 import { useStyles } from './styles'
 
-import AuthProvider from './auth/auth'
+// import { AuthProvider } from './context/authContext'
+import PrivateRoute from './components/PrivateRoute'
+import { useAuth } from './context/authContext'
 
 function App() {
   const classes = useStyles()
+  const { currentUser } = useAuth()
   return (
-    // <AuthProvider>
-      <div className="App">
-        <Header />
-        <Grid container>
-          <Grid item lg={2.5}>
-            <SidebarNav />
+    <>
+      {currentUser ? (
+        <div className="App">
+          <Header />
+          <Grid container>
+            <Grid item>
+              <SidebarNav />
+            </Grid>
+            <Grid item className={classes.rightgrid}>
+              <Switch>
+                <PrivateRoute exact path="/users" component={Users} />
+                <PrivateRoute exact path="/products" component={Products} />
+              </Switch>
+            </Grid>
           </Grid>
-          <Grid item className={classes.rightgrid}>
-            <Switch>
-              <Route exact path="/signUp" render={() => <SignUp />} />
-              <Route exact path="/users" render={() => <Users />} />
-              <Route exact path="/products" render={() => <Products />} />
-            </Switch>
-          </Grid>
-        </Grid>
-      </div>
-    // </AuthProvider>
+        </div>
+      ) : (
+        <div
+          className="App"
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+          }}
+        >
+          <Switch>
+            <Route path="/signUp" render={() => <SignUp />} />
+            <Route path="/login" render={() => <Login />} />
+          </Switch>
+        </div>
+      )}
+    </>
   )
 }
 
