@@ -110,7 +110,6 @@ const Login = () => {
               return (
                 <TextField
                   key={input.id}
-                  autoFocus
                   margin="dense"
                   id={input.id}
                   label={input.label}

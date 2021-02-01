@@ -16,8 +16,13 @@ import signUp from '../../assets/signUp/signUp.png'
 import avatar from '../../assets/signUp/girl.svg'
 
 const SignUp = () => {
-  const { signup } = useAuth()
+  const { signup, currentUser } = useAuth()
   const [error, setError] = useState('')
+  const [user, setUser] = useState({
+    name: '',
+    lastName: '',
+    photo: ''
+  })
   const [registration, setRegistration] = useState({
     email: '',
     password: '',
@@ -26,7 +31,13 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false)
   const history = useHistory()
 
-
+  const saveUser = (event) =>{
+    setUser({
+      name: event.target.form[0].value,
+      lastName: event.target.form[2].value,
+      photo: '',
+    })
+  }
   const saveRegistrationData = (event) => {
     setRegistration({
       email: event.target.form[4].value,
@@ -115,7 +126,6 @@ const SignUp = () => {
               return (
                 <TextField
                   key={input.id}
-                  autoFocus
                   margin="dense"
                   id={input.id}
                   label={input.label}
