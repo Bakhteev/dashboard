@@ -17,6 +17,7 @@ import logo from '../../../../assets/logo.svg'
 import useStyles from './style'
 import { inputs } from './const'
 import { setProducts } from '../../../../redux/actions/products'
+import { addNotification } from '../../../../redux/actions/notification'
 
 const url = 'https://dasboard-deae2-default-rtdb.firebaseio.com'
 
@@ -31,7 +32,6 @@ const AddProduct = ({ open, setOpen, state, value }) => {
     downloads: 0,
   })
 
-
   const handleClickcClose = () => {
     setOpen(false)
   }
@@ -45,6 +45,7 @@ const AddProduct = ({ open, setOpen, state, value }) => {
         id: res.data.name,
       }
       dispatch(setProducts([...state, payload]))
+      dispatch(addNotification([payload]))
     } catch (e) {
       throw new Error(e.message)
     }

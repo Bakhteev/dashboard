@@ -43,7 +43,6 @@ const ProductsCard = ({
     }
   }
 
-
   return (
     <Card>
       <CardContent className={classes.cardContent}>

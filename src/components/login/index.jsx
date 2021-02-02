@@ -74,7 +74,7 @@ const Login = () => {
                 style={{ textDecoration: 'underline' }}
               >
                 {' '}
-                Sign In
+                Log in
               </Typography>
             </Link>
           </div>
@@ -89,7 +89,7 @@ const Login = () => {
                 color: '#212529',
               }}
             >
-              Sign up to Brainalityca
+              Log in to Brainalityca
             </Typography>
             <Typography
               variant="h6"
@@ -102,7 +102,7 @@ const Login = () => {
                 color: '#9EA0A5',
               }}
             >
-              Sign up on the internal platform
+              Log in on the internal platform
             </Typography>
           </div>
           <form onSubmit={handleSubmit}>
