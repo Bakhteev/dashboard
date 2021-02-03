@@ -12,7 +12,7 @@ const ProductsHeader = () => {
           classes={{ root: classes.root, outlined: classes.root }}
           className={classes.paper}
         >
-          <Grid conatiner className={classes.flex}>
+          <Box className={classes.flex}>
             <Grid
               item
               xs={5}
@@ -29,7 +29,7 @@ const ProductsHeader = () => {
                 Devias Products
               </Typography>
             </Grid>
-          </Grid>
+          </Box>
         </Paper>
       </Box>
   )

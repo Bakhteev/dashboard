@@ -8,19 +8,28 @@ import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined'
 import logo from '../../assets/logo.svg'
 import useStyles from './style'
 import { useAuth } from '../../context/authContext'
+import NotificationPopUp from './notificationPopUp'
 
 const Header = () => {
   const classes = useStyles()
   const [error, setError] = useState('')
+  const [open, setOpen] = React.useState(false)
   const { logout } = useAuth()
   const history = useHistory()
-  
+
   const state = useSelector(({ notifications }) => {
     return {
       notifications: notifications.notifications,
       number: notifications.number,
     }
   })
+  // const serialNotifications = JSON.stringify(state.notifications)
+
+  // localStorage.setItem('notifications', serialNotifications)
+  // localStorage.setItem('number', state.number)
+
+  // const returtNotifications = JSON.parse(localStorage.getItem('notifications'))
+  // const numberOfNotifications = localStorage.getItem('number')
 
   const handleLogOut = async () => {
     setError('')
@@ -30,6 +39,10 @@ const Header = () => {
     } catch (error) {
       setError(new Error('Failed to log out'))
     }
+  }
+
+  const handleClickOpen = () => {
+    setOpen(true)
   }
 
   return (
@@ -47,6 +60,7 @@ const Header = () => {
               aria-label="Notification"
               color="inherit"
               style={{ position: 'relative' }}
+              onClick={handleClickOpen}
             >
               <NotificationsNoneOutlinedIcon />
               {state.number === 0 ? (
@@ -78,6 +92,7 @@ const Header = () => {
           </Box>
         </Toolbar>
       </AppBar>
+      <NotificationPopUp open={open} setOpen={setOpen} />
       {error &&
         setTimeout(() => {
           return (

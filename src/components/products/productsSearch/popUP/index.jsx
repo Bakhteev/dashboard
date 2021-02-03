@@ -21,7 +21,7 @@ import { addNotification } from '../../../../redux/actions/notification'
 
 const url = 'https://dasboard-deae2-default-rtdb.firebaseio.com'
 
-const AddProduct = ({ open, setOpen, state, value }) => {
+const AddProduct = ({ open, setOpen, products, notifications }) => {
   const dispatch = useDispatch()
   const classes = useStyles()
   const [newProduct, setNewProduct] = React.useState({
@@ -44,8 +44,8 @@ const AddProduct = ({ open, setOpen, state, value }) => {
         ...product,
         id: res.data.name,
       }
-      dispatch(setProducts([...state, payload]))
-      dispatch(addNotification([payload]))
+      dispatch(setProducts([...products, payload]))
+      dispatch(addNotification([...notifications, payload]))
     } catch (e) {
       throw new Error(e.message)
     }
@@ -78,7 +78,7 @@ const AddProduct = ({ open, setOpen, state, value }) => {
     <Dialog
       open={open}
       onClose={handleClickcClose}
-      aria-labelledBy="form-dialog-title"
+      aria-labelledby="form-dialog-title"
       classes={{ paper: classes.paper, paperWidthSm: classes.paper }}
     >
       <Grid container>

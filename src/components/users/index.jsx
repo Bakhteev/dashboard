@@ -4,7 +4,11 @@ import axios from 'axios'
 import UsersHeader from './usersHeader'
 import UsersTable from './usersTable'
 import useStyles from './style'
-import { setUsersDatabase, showLoader, hideLoader } from '../../redux/actions/users'
+import {
+  setUsersDatabase,
+  showLoader,
+  hideLoader,
+} from '../../redux/actions/users'
 import Loader from '../loader'
 
 const url = 'https://dasboard-deae2-default-rtdb.firebaseio.com/'
@@ -13,20 +17,23 @@ const Users = () => {
   const classes = useStyles()
   const [searchValue, setSearchValue] = React.useState('')
   const dispatch = useDispatch()
-  const state = useSelector(({ usersDatabase }) => {
+  const state = useSelector(({ usersDatabase, notifications }) => {
     return {
       items: usersDatabase.items,
-      loading: usersDatabase.loading
+      loading: usersDatabase.loading,
+      notifications: notifications.notifications,
     }
   })
 
-  const ShowLoader = () =>{dispatch(showLoader())}
+  const ShowLoader = () => {
+    dispatch(showLoader())
+  }
 
   const fetch = async () => {
     ShowLoader()
 
     const res = await axios.get(`${url}/users.json`)
- 
+
     if (!res.data) {
       return (res.data = {})
     } else {
@@ -45,7 +52,11 @@ const Users = () => {
   }, [])
   return (
     <div className={classes.root}>
-      <UsersHeader state={state.items} setSearchValue={setSearchValue} />
+      <UsersHeader
+        state={state.items}
+        notifications={state.notifications}
+        setSearchValue={setSearchValue}
+      />
       {state.loading ? (
         <Loader />
       ) : (
@@ -57,7 +68,9 @@ const Users = () => {
               item.name.toLowerCase().includes(searchValue.toLowerCase())
             ) {
               return item
-            } else if (item.userId.toLowerCase().includes(searchValue.toLowerCase())) {
+            } else if (
+              item.userId.toLowerCase().includes(searchValue.toLowerCase())
+            ) {
               return item
             }
           })}

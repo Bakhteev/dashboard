@@ -11,7 +11,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import useStyles from './style'
 import AddProduct from './popUP'
 
-const ProductsSearch = ({ state, setSearchValue }) => {
+const ProductsSearch = ({ products, setSearchValue, notifications }) => {
   const [open, setOpen] = React.useState(false)
   const [inputValue, setInputValue] = React.useState('')
 
@@ -52,7 +52,12 @@ const ProductsSearch = ({ state, setSearchValue }) => {
         <Button classes={{ root: classes.root }} onClick={handleClickOpen}>
           NEW PRODUCT
         </Button>
-        <AddProduct setOpen={setOpen} open={open} state={state} />
+        <AddProduct
+          setOpen={setOpen}
+          open={open}
+          products={products}
+          notifications={notifications}
+        />
       </Toolbar>
     </AppBar>
   )

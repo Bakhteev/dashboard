@@ -13,6 +13,11 @@ export const theme = createMuiTheme({
           textDecoration: 'none',
           color: 'inherit',
         },
+        ul:{
+          margin: 0,
+          padding: 0,
+          listStyle: 'none'
+        }
       },
     },
   },

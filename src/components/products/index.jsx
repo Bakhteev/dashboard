@@ -31,10 +31,11 @@ const Products = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const [searchValue, setSearchValue] = React.useState('')
-  const state = useSelector(({ products }) => {
+  const state = useSelector(({ products, notifications}) => {
     return {
       items: products.items,
-      loading: products.loading
+      loading: products.loading,
+      notifications: notifications.notifications,
     }
   })
 
@@ -65,7 +66,8 @@ const Products = () => {
     <>
       <ProductsHeader />
       <ProductsSearch
-        state={state.items}
+        products={state.items}
+        notifications={state.notifications}
         value={state.value}
         setSearchValue={setSearchValue}
       />
@@ -74,7 +76,6 @@ const Products = () => {
           <Grid item xs={12}>
             <Loader />
           </Grid>
-          
         ) : (
           state.items
             .filter((item) => {

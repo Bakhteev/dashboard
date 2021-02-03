@@ -17,10 +17,11 @@ import logo from '../../../../assets/logo.svg'
 import useStyles from './style'
 import { inputs } from '../../usersTable/const'
 import { setUsersDatabase } from '../../../../redux/actions/users'
+import { addNotification } from "../../../../redux/actions/notification";
 
 const url = 'https://dasboard-deae2-default-rtdb.firebaseio.com'
 
-const AddUser = ({ open, setOpen, state }) => {
+const AddUser = ({ open, setOpen, state, notifications }) => {
   const dispatch = useDispatch()
   const classes = useStyles()
 
@@ -33,6 +34,7 @@ const AddUser = ({ open, setOpen, state }) => {
         id: res.data.name,
       }
       dispatch(setUsersDatabase([...state, payload]))
+      dispatch(addNotification([...notifications, payload]))
     } catch (e) {
       throw new Error(e.message)
     }

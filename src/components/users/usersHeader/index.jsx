@@ -16,6 +16,7 @@ import AddUser from './popUp'
 const UsersHeader = ({
   state,
   setSearchValue,
+  notifications
 }) => {
   const [open, setOpen] = React.useState(false)
   const [inputValue, setInputValue] = React.useState('')
@@ -67,6 +68,7 @@ const UsersHeader = ({
             open={open}
             setOpen={setOpen}
             state={state}
+            notifications={notifications}
           />
         </Box>
       </Toolbar>
