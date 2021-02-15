@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { auth } from '../firebase.js'
 
 const AuthContext = React.createContext()
@@ -6,6 +7,8 @@ const AuthContext = React.createContext()
 export const useAuth = () => {
   return useContext(AuthContext)
 }
+
+
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState()
@@ -34,11 +37,14 @@ export const AuthProvider = ({ children }) => {
     return currentUser.updatePassword(password)
   }
 
+
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user)
       setLoading(false)
     })
+
     return unsubscribe
   }, [])
 

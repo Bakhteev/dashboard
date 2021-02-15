@@ -1,8 +1,11 @@
 import { ADD_NOTIFICATION, REMOVE_NOTIFICATIONS } from '../actions/notification'
 
+const number = JSON.parse(localStorage.getItem('notificationNumber'))
+const notificationItems = JSON.parse(localStorage.getItem('notificationItems'))
+
 const initialState = {
-  notifications: [],
-  number: 0,
+  notifications: notificationItems && notificationItems || [],
+  number,
 }
 
 const notifications = (state = initialState, action) => {
@@ -23,6 +26,5 @@ const notifications = (state = initialState, action) => {
       return state
   }
 }
-
 
 export default notifications

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import {
   Drawer,
   Paper,
@@ -9,7 +10,6 @@ import {
   ListItemText,
   Divider,
   Button,
-  Grid,
 } from '@material-ui/core'
 import ContactSupportOutlinedIcon from '@material-ui/icons/ContactSupportOutlined'
 import avatar from '../../assets/navSidebar/profileImg.png'
@@ -19,6 +19,15 @@ import { NavLink } from 'react-router-dom'
 
 const SidebarNav = () => {
   const classes = useStyles()
+
+  const state = useSelector(({ registratedUsers }) => {
+    return {
+      items: registratedUsers.items,
+    }
+  })
+
+  console.log(typeof state.items)
+
   return (
     <Drawer
       className={classes.sidebar}
@@ -29,13 +38,20 @@ const SidebarNav = () => {
       }}
     >
       <Paper elevation={0} className={classes.avatar}>
-        <img src={avatar} alt="" />
-        <Typography variant="h5" className={classes.name}>
-          Roman Kutepov
-        </Typography>
-        <Typography component='span' className={classes.profession}>
-          Brain Director
-        </Typography>
+        {state.items &&
+          state.items.map((item) => {
+            return (
+              <>
+                <img src={avatar} alt="" />
+                <Typography variant="h5" className={classes.name}>
+                  {item.name}&nbsp;{item.lastName}
+                </Typography>
+                <Typography component="span" className={classes.profession}>
+                  {item.position ? item.position : 'Freelancer'}
+                </Typography>
+              </>
+            )
+          })}
       </Paper>
       <Divider variant="middle" />
       <List className={classes.list}>
@@ -59,7 +75,7 @@ const SidebarNav = () => {
         ))}
       </List>
       <Divider variant="middle" />
-      <Typography component='span' className={classes.span}>
+      <Typography component="span" className={classes.span}>
         Support
       </Typography>
       <Button

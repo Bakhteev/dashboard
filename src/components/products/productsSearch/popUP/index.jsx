@@ -44,8 +44,19 @@ const AddProduct = ({ open, setOpen, products, notifications }) => {
         ...product,
         id: res.data.name,
       }
+      localStorage.setItem(
+        'notificationItems',
+        JSON.stringify([...notifications, payload])
+      )
+      const notificationItemsGet = JSON.parse(
+        localStorage.getItem('notificationItems')
+      )
+      localStorage.setItem(
+        'notificationNumber',
+        JSON.stringify(notificationItemsGet.length)
+      )
       dispatch(setProducts([...products, payload]))
-      dispatch(addNotification([...notifications, payload]))
+      dispatch(addNotification(notificationItemsGet))
     } catch (e) {
       throw new Error(e.message)
     }
@@ -64,6 +75,7 @@ const AddProduct = ({ open, setOpen, products, notifications }) => {
       productname: event.target.form[2].value,
       productDescription: event.target.form[4].value,
       updatedTime: currentDate(),
+      updateHour: new Date().getHours(),
       downloads: 0,
     })
   }

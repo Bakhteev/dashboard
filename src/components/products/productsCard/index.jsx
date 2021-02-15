@@ -44,13 +44,13 @@ const ProductsCard = ({
   }
 
   return (
-    <Card>
+    <Card style={{ display: 'flex' }}>
       <CardContent className={classes.cardContent}>
         <img src={productLogo} alt={productname} className={classes.icon} />
         <Typography variant="h3" className={classes.title}>
           {productname}
         </Typography>
-        <Typography variant="p" className={classes.description}>
+        <Typography component="p" className={classes.description}>
           {productDescription}
         </Typography>
         <Box className={classes.row}>

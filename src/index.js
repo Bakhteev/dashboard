@@ -13,11 +13,11 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <CssBaseline>
         <BrowserRouter>
-          <AuthProvider>
-            <Provider store={store}>
+          <Provider store={store}>
+            <AuthProvider>
               <App />
-            </Provider>
-          </AuthProvider>
+            </AuthProvider>
+          </Provider>
         </BrowserRouter>
       </CssBaseline>
     </ThemeProvider>

@@ -14,7 +14,9 @@ import { useAuth } from './context/authContext'
 
 function App() {
   const classes = useStyles()
-  const { currentUser } = useAuth()
+  const { currentUser, } = useAuth()
+  // setCurrentUser({...currentUser, name: '123', sirName:'159'})
+  // console.log(currentUser.name)
   return (
     <>
       {currentUser ? (

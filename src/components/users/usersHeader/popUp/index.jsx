@@ -34,7 +34,7 @@ const AddUser = ({ open, setOpen, state, notifications }) => {
         id: res.data.name,
       }
       dispatch(setUsersDatabase([...state, payload]))
-      dispatch(addNotification([...notifications, payload]))
+      // dispatch(addNotification([...notifications, payload]))
     } catch (e) {
       throw new Error(e.message)
     }

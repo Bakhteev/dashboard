@@ -23,18 +23,12 @@ const Header = () => {
       number: notifications.number,
     }
   })
-  // const serialNotifications = JSON.stringify(state.notifications)
-
-  // localStorage.setItem('notifications', serialNotifications)
-  // localStorage.setItem('number', state.number)
-
-  // const returtNotifications = JSON.parse(localStorage.getItem('notifications'))
-  // const numberOfNotifications = localStorage.getItem('number')
 
   const handleLogOut = async () => {
     setError('')
     try {
       await logout()
+      localStorage.clear()
       history.push('/login')
     } catch (error) {
       setError(new Error('Failed to log out'))
@@ -42,7 +36,7 @@ const Header = () => {
   }
 
   const handleClickOpen = () => {
-    setOpen(true)
+    setOpen(open ? false : true)
   }
 
   return (
@@ -92,7 +86,7 @@ const Header = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      <NotificationPopUp open={open} setOpen={setOpen} />
+      <NotificationPopUp open={open} setOpen={setOpen} notifications={state.notifications} />
       {error &&
         setTimeout(() => {
           return (

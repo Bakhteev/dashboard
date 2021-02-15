@@ -1,50 +1,48 @@
 import React from 'react'
-import {
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  Button,
-  DialogContent,
-  Grid,
-  DialogContentText,
-  TextField,
-  Box,
-  Typography,
-} from '@material-ui/core'
+import { Dialog, DialogContent, Typography } from '@material-ui/core'
 import headerImg from '../../../assets/header/popUpHeaderImg.svg'
-import dollar from '../../../assets/header/dollar.svg'
-import { TrainRounded } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
+import { useDispatch } from 'react-redux'
+import { removeNotifications } from '../../../redux/actions/notification'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    left: '100% !important',
-    transform: 'translateX(-105%)',
     top: '75px !important',
-    width: 'fit-content',
-    height: 'fit-content',
-  },
-  container: {
-    height: 'auto',
   },
   paper: {
     margin: 0,
   },
+  scrollPaper: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+  },
+  container: {},
 }))
 
-const NotificationPopUp = ({ open, setOpen }) => {
+const NotificationPopUp = ({ open, setOpen, notifications }) => {
+  console.log(notifications)
   const handleClickClose = () => {
     setOpen(false)
   }
   const classes = useStyles()
+  const dispatch = useDispatch()
+
+  const clear = () => {
+    localStorage.removeItem('notificationItems')
+    localStorage.removeItem('notificationNumber')
+    dispatch(removeNotifications())
+  }
   return (
     <Dialog
-      style={{ inset: 1 }}
-      classes={{ root: classes.root, container: classes.container, paper: classes.paper }}
       open={open}
       onClick={handleClickClose}
-      invisible={true}
-      hideBackdrop={true}
+      onClose={clear}
+      classes={{
+        root: classes.root,
+        paper: classes.paper,
+        container: classes.container,
+        scrollPaper: classes.scrollPaper,
+      }}
     >
       <DialogContent
         style={{
@@ -85,13 +83,30 @@ const NotificationPopUp = ({ open, setOpen }) => {
           </Typography>
         </div>
         <ul>
-          <li style={{ display: 'flex', padding: '15px 0 15px 16px' }}>
-            <img src={dollar} alt="" />
-            <div>
-              <Typography>New order has been received</Typography>
-              <Typography>2 hours ago</Typography>
-            </div>
-          </li>
+          {notifications.map((notification) => {
+            return (
+              <li style={{ display: 'flex', padding: '15px 0 15px 16px' }}>
+                {notification.productname ? (
+                  <>
+                    <img
+                      src={notification.productLogo}
+                      alt=""
+                      style={{ width: 36, height: 36 }}
+                    />
+                    <div>
+                      <Typography>Product has been approved</Typography>
+                      <Typography>
+                        {new Date().getHours() - notification.updateHour} hours
+                        ago
+                      </Typography>
+                    </div>
+                  </>
+                ) : (
+                  ''
+                )}
+              </li>
+            )
+          })}
         </ul>
       </DialogContent>
     </Dialog>
