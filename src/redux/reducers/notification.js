@@ -4,7 +4,7 @@ const number = JSON.parse(localStorage.getItem('notificationNumber'))
 const notificationItems = JSON.parse(localStorage.getItem('notificationItems'))
 
 const initialState = {
-  notifications: notificationItems && notificationItems || [],
+  notifications: notificationItems || [],
   number,
 }
 
@@ -20,7 +20,7 @@ const notifications = (state = initialState, action) => {
       return {
         ...state,
         notifications: [],
-        number: 0,
+        number: null,
       }
     default:
       return state

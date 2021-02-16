@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useHistory, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
@@ -25,7 +25,7 @@ const url = 'https://dasboard-deae2-default-rtdb.firebaseio.com'
 const SignUp = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
-  const { signup, currentUser } = useAuth()
+  const { signup } = useAuth()
   const [error, setError] = useState('')
   const [user, setUser] = useState({
     name: '',

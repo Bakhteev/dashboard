@@ -24,7 +24,7 @@ const Login = () => {
   const classes = useStyles()
   const { login } = useAuth()
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
   const history = useHistory()
   const [registration, setRegistration] = useState({
     email: '',
@@ -41,7 +41,7 @@ const Login = () => {
     e.preventDefault()
     try {
       setError('')
-      setLoading(true)
+      // setLoading(true)
       await login(registration.email, registration.password)
       const res = await axios.get(`${url}/registratedUser.json`)
       if (!res.data) {
@@ -67,7 +67,7 @@ const Login = () => {
       setError('Failed to sign in')
     }
 
-    setLoading(false)
+    // setLoading(false)
   }
   return (
     <>

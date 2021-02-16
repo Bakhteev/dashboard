@@ -25,9 +25,6 @@ const SidebarNav = () => {
       items: registratedUsers.items,
     }
   })
-
-  console.log(typeof state.items)
-
   return (
     <Drawer
       className={classes.sidebar}
@@ -37,25 +34,23 @@ const SidebarNav = () => {
         paper: classes.root,
       }}
     >
-      <Paper elevation={0} className={classes.avatar}>
-        {state.items &&
-          state.items.map((item) => {
-            return (
-              <>
-                <img src={avatar} alt="" />
-                <Typography variant="h5" className={classes.name}>
-                  {item.name}&nbsp;{item.lastName}
-                </Typography>
-                <Typography component="span" className={classes.profession}>
-                  {item.position ? item.position : 'Freelancer'}
-                </Typography>
-              </>
-            )
-          })}
-      </Paper>
+      {state.items &&
+        state.items.map((item) => {
+          return (
+            <Paper elevation={0} className={classes.avatar} key={item.id}>
+              <img src={avatar} alt="" />
+              <Typography variant="h5" className={classes.name}>
+                {item.name}&nbsp;{item.lastName}
+              </Typography>
+              <Typography component="span" className={classes.profession}>
+                {item.position ? item.position : 'Freelancer'}
+              </Typography>
+            </Paper>
+          )
+        })}
       <Divider variant="middle" />
       <List className={classes.list}>
-        {sidebarItems.map((item, index) => (
+        {sidebarItems.map((item) => (
           <ListItem
             classes={{ gutters: classes.listItem }}
             component="li"

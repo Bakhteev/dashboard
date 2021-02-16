@@ -30,7 +30,7 @@ const ProductsSearch = ({ products, setSearchValue, notifications }) => {
       component="div"
       position="static"
       color="transparent"
-      elevation="0"
+      elevation={0}
       className={classes.appBar}
     >
       <Toolbar

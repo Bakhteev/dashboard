@@ -23,8 +23,9 @@ const products = (state = initialState, action) => {
         ...state,
         loading: true,
       }
+    default:
+      return state
   }
-  return state
 }
 
 export default products

@@ -4,11 +4,7 @@ import axios from 'axios'
 import UsersHeader from './usersHeader'
 import UsersTable from './usersTable'
 import useStyles from './style'
-import {
-  setUsersDatabase,
-  showLoader,
-  hideLoader,
-} from '../../redux/actions/users'
+import { setUsersDatabase, showLoader } from '../../redux/actions/users'
 import Loader from '../loader'
 
 const url = 'https://dasboard-deae2-default-rtdb.firebaseio.com/'
@@ -73,6 +69,7 @@ const Users = () => {
             ) {
               return item
             }
+            return
           })}
         />
       )}

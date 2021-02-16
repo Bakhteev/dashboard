@@ -36,7 +36,7 @@ const Header = () => {
   }
 
   const handleClickOpen = () => {
-    setOpen(open ? false : true)
+    setOpen(true)
   }
 
   return (
@@ -51,13 +51,13 @@ const Header = () => {
           </Box>
           <Box className={classes.box}>
             <IconButton
-              aria-label="Notification"
+              // aria-label="Notification"
               color="inherit"
               style={{ position: 'relative' }}
               onClick={handleClickOpen}
             >
               <NotificationsNoneOutlinedIcon />
-              {state.number === 0 ? (
+              {state.number === null ? (
                 ''
               ) : (
                 <div
@@ -86,7 +86,12 @@ const Header = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      <NotificationPopUp open={open} setOpen={setOpen} notifications={state.notifications} />
+      <NotificationPopUp
+        open={open}
+        setOpen={setOpen}
+        notifications={state.notifications}
+        notificationsNumber={state.number}
+      />
       {error &&
         setTimeout(() => {
           return (

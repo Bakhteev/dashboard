@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import AccessTimeOutlinedIcon from '@material-ui/icons/AccessTimeOutlined'
 import GetAppIcon from '@material-ui/icons/GetApp'
-import { counter, setProducts } from '../../../redux/actions/products'
+import { counter } from '../../../redux/actions/products'
 import { useDispatch } from 'react-redux'
 import useStyles from './style'
 
@@ -56,7 +56,7 @@ const ProductsCard = ({
         <Box className={classes.row}>
           <Box className={classes.rowLeft}>
             <AccessTimeOutlinedIcon />
-            <Typography variant="span" className={classes.date}>
+            <Typography component="span" className={classes.date}>
               {updatedTime}
             </Typography>
           </Box>
@@ -67,7 +67,7 @@ const ProductsCard = ({
             >
               <GetAppIcon />
             </IconButton>
-            <Typography variant="span" className={classes.downloads}>
+            <Typography component="span" className={classes.downloads}>
               {downloads}
             </Typography>
           </CardActions>

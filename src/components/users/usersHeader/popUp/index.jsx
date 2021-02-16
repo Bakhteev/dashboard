@@ -17,7 +17,7 @@ import logo from '../../../../assets/logo.svg'
 import useStyles from './style'
 import { inputs } from '../../usersTable/const'
 import { setUsersDatabase } from '../../../../redux/actions/users'
-import { addNotification } from "../../../../redux/actions/notification";
+
 
 const url = 'https://dasboard-deae2-default-rtdb.firebaseio.com'
 
@@ -34,7 +34,6 @@ const AddUser = ({ open, setOpen, state, notifications }) => {
         id: res.data.name,
       }
       dispatch(setUsersDatabase([...state, payload]))
-      // dispatch(addNotification([...notifications, payload]))
     } catch (e) {
       throw new Error(e.message)
     }
@@ -90,7 +89,7 @@ const AddUser = ({ open, setOpen, state, notifications }) => {
     <Dialog
       open={open}
       onClose={handleClickcClose}
-      aria-labelledBy="form-dialog-title"
+      aria-labelledby="form-dialog-title"
       classes={{ paper: classes.paper, paperWidthSm: classes.paper }}
     >
       <Grid container>

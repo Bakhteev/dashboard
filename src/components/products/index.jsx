@@ -31,7 +31,7 @@ const Products = () => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const [searchValue, setSearchValue] = React.useState('')
-  const state = useSelector(({ products, notifications}) => {
+  const state = useSelector(({ products, notifications }) => {
     return {
       items: products.items,
       loading: products.loading,
@@ -39,13 +39,13 @@ const Products = () => {
     }
   })
 
-  const ShowLoader = () =>{dispatch(showLoader())}
+  const ShowLoader = () => {
+    dispatch(showLoader())
+  }
 
   const fetch = async () => {
     ShowLoader()
-
     const res = await axios.get(`${url}/products.json`)
-
     if (!res.data) {
       return (res.data = {})
     } else {
@@ -88,10 +88,12 @@ const Products = () => {
               ) {
                 return item
               }
+              return 
             })
             .map((item) => {
               return (
                 <Grid
+                  key={item.id}
                   className={classes.card}
                   item
                   style={{
